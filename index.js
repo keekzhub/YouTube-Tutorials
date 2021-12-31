@@ -8,7 +8,6 @@ module.exports = client;
 
 client.commands = new Collection()
 client.aliases = new Collection()
-client.slashcommands = new Collection()
 
 require('./handler')(client)
 
