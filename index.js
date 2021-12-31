@@ -4,6 +4,11 @@ const client = new Discord.Client({ intents: 32767 })
 const preifx = process.env['prefix']
 const token = process.env['token']
 
+
+client.commands = new Collection()
+client.aliases = new Collection()
+
+
 client.on('ready, () => {
           console.log('i am online')
 })
