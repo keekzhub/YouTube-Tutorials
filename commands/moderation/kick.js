@@ -1,5 +1,4 @@
 const { MessageEmbed } = require('discord.js')
-const logSchema = require('../../models/logs')
 
 module.exports = {
   name: 'kick',
@@ -25,18 +24,5 @@ module.exports = {
       reason: reason
     }).catch(err => console.log(err)).then(() => message.channel.send({ embeds: [embed]}))
     message.delete().catch(err => console.log(err)) // this part is optional, if you want the command to be deleted after the embed is sent.
-    const data = await logSchema.findOne({ Guild: user.guild.id })
-    if (!data) return
-
-    const logChannel = client.channels.cache.get(data.Channel)
-
-    const embed1 = new MessageEmbed()
-    .setTitle('Member kicked!')
-    .setDescription(`${user} was kicked!\nReason: ${reason}`)
-    .setTimestamp()
-    .setColor('RED')
-
-    logChannel.send({embeds: [embed1]})
-
   }
 }
