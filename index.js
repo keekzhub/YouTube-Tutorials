@@ -1,8 +1,13 @@
-const Discord = require('discord.js')
-const client = new Discord.Client({ intents: 32767 })
+const { Collection, Client } = require('discord.js')
+const client = new Client({ intents: 32767 })
+const server = require('./server.js')
+const mongoose = require('mongoose')
+mongoose.connect('mongodb+srv://zox:Cminami.12@database.xcmtd.mongodb.net/zox?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true}).then(console.log('connected to the database'))
 
-const preifx = process.env['prefix']
+const prefix = process.env['prefix']
+
 const token = process.env['token']
+
 
 module.exports = client;
 
@@ -12,12 +17,5 @@ client.slashcommands = new Collection()
 
 require('./handler')(client)
 
-client.on('ready, () => {
-          console.log('i am online')
-})
-client.on('messageCreate, async (message) => {
-if (message.content === '+ping') {
-  message.reply({ content: 'pong!' })
-}
-})
+
 client.login(token)
